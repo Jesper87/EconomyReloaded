@@ -1,28 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Linq;
-using System.Web;
-using EconomyReloaded.Data;
-using EconomyReloaded.Factory;
-using EconomyReloaded.Models;
+using EconomyReloaded.Core.Database;
+using EconomyReloaded.Core.Factories;
+using EconomyReloaded.Core.Models;
 
-namespace EconomyReloaded.Repository
+namespace EconomyReloaded.Core.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
-        private readonly DatabaseConnection _databaseConnection;
-        private readonly UserFactory _userFactory;
+        private readonly IDatabaseConnection _databaseConnection;
+        private readonly IUserFactory _userFactory;
 
-        public UserRepository()
-        {
-            _databaseConnection = new DatabaseConnection();
-            _userFactory = new UserFactory();
-        }
-
-        public UserRepository(DatabaseConnection databaseConnection, UserFactory userFactory)
+        public UserRepository(IDatabaseConnection databaseConnection, IUserFactory userFactory)
         {
             this._databaseConnection = databaseConnection;
             this._userFactory = userFactory;
@@ -40,7 +31,6 @@ namespace EconomyReloaded.Repository
                     {
                         connection.Open();
                         var command = new SqlCommand("SELECT [UserId],[Email],[FirstName],[LastName] FROM [dbo].[Users]", connection);
-                        var test = command.ExecuteNonQuery();              
 
                         using (var reader = command.ExecuteReader())
                         {

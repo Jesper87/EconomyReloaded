@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using EconomyReloaded.Models;
+using EconomyReloaded.Core.Models;
 
-namespace EconomyReloaded.Factory
+namespace EconomyReloaded.Core.Factories
 {
-    public class UserFactory
+    public class UserFactory : IUserFactory
     {
         public User CreateUser(SqlDataReader reader)
         {

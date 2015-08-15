@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+﻿using System.Configuration;
 
-namespace EconomyReloaded.Data
+namespace EconomyReloaded.Core.Database
 {
-    public class DatabaseConnection
+    public sealed class DatabaseConnection : IDatabaseConnection
     {
         private string _connectionString;
         public string ConnectionString
