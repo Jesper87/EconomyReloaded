@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EconomyReloaded.Core", "Eco
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EconomyReloaded.Tests", "EconomyReloaded.Tests\EconomyReloaded.Tests.csproj", "{650F8814-A104-4219-B6C6-46EA42301DEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EconomyReloaded.Services", "EconomyReloaded.Services\EconomyReloaded.Services.csproj", "{9C956CE9-E4A7-4362-BBB7-8304A5CF0831}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EconomyReloaded.Api", "EconomyReloaded.Api\EconomyReloaded.Api.csproj", "{F1154B0B-CBE4-45FC-8259-5817879DA748}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{650F8814-A104-4219-B6C6-46EA42301DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{650F8814-A104-4219-B6C6-46EA42301DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{650F8814-A104-4219-B6C6-46EA42301DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C956CE9-E4A7-4362-BBB7-8304A5CF0831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C956CE9-E4A7-4362-BBB7-8304A5CF0831}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C956CE9-E4A7-4362-BBB7-8304A5CF0831}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C956CE9-E4A7-4362-BBB7-8304A5CF0831}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1154B0B-CBE4-45FC-8259-5817879DA748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1154B0B-CBE4-45FC-8259-5817879DA748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1154B0B-CBE4-45FC-8259-5817879DA748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1154B0B-CBE4-45FC-8259-5817879DA748}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

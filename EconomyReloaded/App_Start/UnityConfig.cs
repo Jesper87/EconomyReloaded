@@ -1,7 +1,10 @@
 using System;
 using EconomyReloaded.Core.Database;
 using EconomyReloaded.Core.Factories;
+using EconomyReloaded.Core.Factories.User;
 using EconomyReloaded.Core.Repositories;
+using EconomyReloaded.Core.Repositories.User;
+using EconomyReloaded.Services.Services.User;
 using Microsoft.Practices.Unity;
 
 namespace EconomyReloaded
@@ -41,6 +44,7 @@ namespace EconomyReloaded
 
             container.RegisterType<IUserRepository, UserRepository>()
             .RegisterType<IUserFactory, UserFactory>()
+            .RegisterType<IUserService, UserService>()
             .RegisterType<IDatabaseConnection, DatabaseConnection>();
 
 

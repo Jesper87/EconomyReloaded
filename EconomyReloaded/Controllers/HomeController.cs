@@ -6,24 +6,34 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EconomyReloaded.Core.Repositories;
+using EconomyReloaded.Core.Repositories.User;
+using EconomyReloaded.Services.Services.User;
+using EconomyReloaded.ViewModels;
 
 namespace EconomyReloaded.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public HomeController(IUserRepository userRepository)
+        public HomeController(IUserService userService)
         {
-            this._userRepository = userRepository;
+            _userService = userService;
         }
 
         // GET: Home
         public ActionResult Index()
         {
-            var users = _userRepository.GetAllUsers();
+            var users = _userService.GetAllUsers();
 
-            return View(users);
+            var userViewModel = users.Select(user => new UserSimpleViewModel { Email = user.Email, UserId = user.UserId }).ToList();
+
+            return View("Index", userViewModel);
+        }
+
+        public ActionResult Economy(string userId)
+        {
+            return View("Economy");
         }
     }
 }

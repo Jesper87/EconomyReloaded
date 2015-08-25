@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using EconomyReloaded.Core.Database;
 using EconomyReloaded.Core.Factories;
-using EconomyReloaded.Core.Models;
+using EconomyReloaded.Core.Factories.User;
 
-namespace EconomyReloaded.Core.Repositories
+namespace EconomyReloaded.Core.Repositories.User
 {
     public class UserRepository : IUserRepository
     {
@@ -19,9 +20,9 @@ namespace EconomyReloaded.Core.Repositories
             this._userFactory = userFactory;
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public IEnumerable<Models.User.UserDetails> GetAllUsers()
         {
-            var users = new List<User>();
+            var users = new List<Models.User.UserDetails>();
 
             if (!string.IsNullOrEmpty(_databaseConnection.ConnectionString))
             {
@@ -52,6 +53,40 @@ namespace EconomyReloaded.Core.Repositories
             }
 
             return users;
+        }
+
+        public Models.User.UserDetails GetUserById(int userId)
+        {
+            var selectedUser = new Models.User.UserDetails();
+
+            if (!string.IsNullOrEmpty(_databaseConnection.ConnectionString))
+            {
+                try
+                {
+                    using (var connection = new SqlConnection(_databaseConnection.ConnectionString))
+                    {
+                        connection.Open();
+                        var command = new SqlCommand("SELECT [UserId],[Email],[FirstName],[LastName] FROM [dbo].[Users] WHERE UserId = @userId", connection);
+                        command.Parameters.Add("userId", SqlDbType.Int).Value = userId;
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    selectedUser = _userFactory.CreateUser(reader);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+            return selectedUser;
         }
     }
 }

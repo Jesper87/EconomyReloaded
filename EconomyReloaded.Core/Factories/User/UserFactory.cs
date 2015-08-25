@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Data.SqlClient;
-using EconomyReloaded.Core.Models;
 
-namespace EconomyReloaded.Core.Factories
+namespace EconomyReloaded.Core.Factories.User
 {
     public class UserFactory : IUserFactory
     {
-        public User CreateUser(SqlDataReader reader)
+        public Models.User.UserDetails CreateUser(SqlDataReader reader)
         {
-            var user = new User
+            var user = new Models.User.UserDetails
             {
                 UserId = Convert.ToInt32(reader["UserId"]),
                 Email = reader["Email"].ToString(),

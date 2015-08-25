@@ -1,7 +1,4 @@
-﻿@model IEnumerable<EconomyReloaded.Core.Models.User>
-
-<h1>Index</h1>
-
+﻿@model List<EconomyReloaded.ViewModels.UserSimpleViewModel>
 
 @{
     if (!Model.Any())
@@ -11,14 +8,16 @@
     else
     {
         <h2>Dessa användare funna:</h2>
+
         foreach (var user in Model)
         {
-            <hr />
-            <p>@user.Email</p>
-            <p>@user.FirstName</p>
-            <p>@user.LastName</p>
-            <p>@user.UserId</p>
-            <hr />
+            <div class="user-info">
+                <hr />
+                <p>@user.Email</p>
+                <input class="info-more more " type="button" data-userId="@user.UserId" value="+" />
+                <div class="info-@user.UserId"></div>
+                <hr />
+            </div>
         }
     }
 

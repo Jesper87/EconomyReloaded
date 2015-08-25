@@ -1,6 +1,6 @@
-﻿namespace EconomyReloaded.Core.Models
+﻿namespace EconomyReloaded.Core.Models.User
 {
-    public class User
+    public class UserDetails
     {
         public string Email { get; set; }
         public string FirstName { get; set; }
