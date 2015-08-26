@@ -22,7 +22,8 @@ namespace EconomyReloaded.Services.Services.User
             var users = _userRepository.GetAllUsers();
             if (users != null)
                 return users;
-            return Enumerable.Empty<Core.Models.User.UserDetails>();
+            return null;
+            //throw new UserNotFoundException("No users found in database");
         }
 
         public Core.Models.User.UserDetails GetById(int userId)
@@ -30,7 +31,8 @@ namespace EconomyReloaded.Services.Services.User
             var user = _userRepository.GetUserById(userId);
             if (user != null)
                 return user;
-            throw new UserNotFoundException("No user found on userId");
+            return null;
+            //throw new UserNotFoundException("No user found on userId");
         }
     }
 }

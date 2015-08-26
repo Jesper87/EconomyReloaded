@@ -22,14 +22,14 @@ namespace EconomyReloaded.Core.Repositories.User
 
         public IEnumerable<Models.User.UserDetails> GetAllUsers()
         {
-            var users = new List<Models.User.UserDetails>();
-
             if (!string.IsNullOrEmpty(_databaseConnection.ConnectionString))
             {
                 try
                 {
                     using (var connection = new SqlConnection(_databaseConnection.ConnectionString))
                     {
+                        var users = new List<Models.User.UserDetails>();
+
                         connection.Open();
                         var command = new SqlCommand("SELECT [UserId],[Email],[FirstName],[LastName] FROM [dbo].[Users]", connection);
 
@@ -44,6 +44,7 @@ namespace EconomyReloaded.Core.Repositories.User
                                 }
                             }
                         }
+                        return users;
                     }
                 }
                 catch (Exception ex)
@@ -52,19 +53,21 @@ namespace EconomyReloaded.Core.Repositories.User
                 }
             }
 
-            return users;
+            return null;
         }
 
         public Models.User.UserDetails GetUserById(int userId)
-        {
-            var selectedUser = new Models.User.UserDetails();
-
+        {         
             if (!string.IsNullOrEmpty(_databaseConnection.ConnectionString))
             {
+
                 try
                 {
                     using (var connection = new SqlConnection(_databaseConnection.ConnectionString))
                     {
+
+                        var selectedUser = new Models.User.UserDetails();
+
                         connection.Open();
                         var command = new SqlCommand("SELECT [UserId],[Email],[FirstName],[LastName] FROM [dbo].[Users] WHERE UserId = @userId", connection);
                         command.Parameters.Add("userId", SqlDbType.Int).Value = userId;
@@ -79,6 +82,7 @@ namespace EconomyReloaded.Core.Repositories.User
                                 }
                             }
                         }
+                        return selectedUser;
                     }
                 }
                 catch (Exception ex)
@@ -86,7 +90,8 @@ namespace EconomyReloaded.Core.Repositories.User
                     Debug.WriteLine(ex.Message);
                 }
             }
-            return selectedUser;
+
+            return null;
         }
     }
 }

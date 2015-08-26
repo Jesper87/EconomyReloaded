@@ -1,9 +1,12 @@
 using System;
 using EconomyReloaded.Core.Database;
 using EconomyReloaded.Core.Factories;
+using EconomyReloaded.Core.Factories.Economy;
 using EconomyReloaded.Core.Factories.User;
 using EconomyReloaded.Core.Repositories;
+using EconomyReloaded.Core.Repositories.Economy;
 using EconomyReloaded.Core.Repositories.User;
+using EconomyReloaded.Services.Services.Economy;
 using EconomyReloaded.Services.Services.User;
 using Microsoft.Practices.Unity;
 
@@ -45,6 +48,9 @@ namespace EconomyReloaded
             container.RegisterType<IUserRepository, UserRepository>()
             .RegisterType<IUserFactory, UserFactory>()
             .RegisterType<IUserService, UserService>()
+            .RegisterType<IReceiptService, ReceiptService>()
+            .RegisterType<IReceiptFactory, ReceiptFactory>()
+            .RegisterType<IReceiptRepository, ReceiptRepository>()
             .RegisterType<IDatabaseConnection, DatabaseConnection>();
 
 

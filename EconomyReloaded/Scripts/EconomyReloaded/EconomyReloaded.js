@@ -32,3 +32,15 @@
         $(".info-" + id).empty();
     }
 });
+
+$("#btnAddReceipt").click(function() {
+    $.ajax({
+        url: $(this).data('url'),
+        type: "GET",
+        cache: false,
+        success: function(result) {
+            $("#addReceiptPartial").html(result);
+        }
+    });
+    return false;
+});

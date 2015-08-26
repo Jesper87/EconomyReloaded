@@ -7,6 +7,7 @@ namespace EconomyReloaded.Core.Factories.User
     {
         public Models.User.UserDetails CreateUser(SqlDataReader reader)
         {
+            
             var user = new Models.User.UserDetails
             {
                 UserId = Convert.ToInt32(reader["UserId"]),

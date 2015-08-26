@@ -44,11 +44,16 @@
   <ItemGroup>
     <Compile Include="Database\DatabaseConnection.cs" />
     <Compile Include="Database\IDatabaseConnection.cs" />
+    <Compile Include="Factories\Economy\IReceiptFactory.cs" />
+    <Compile Include="Factories\Economy\ReceiptFactory.cs" />
     <Compile Include="Factories\User\IUserFactory.cs" />
     <Compile Include="Factories\User\UserFactory.cs" />
-    <Compile Include="Models\Economy\Economy.cs" />
+    <Compile Include="Models\Economy\Receipt.cs" />
+    <Compile Include="Models\Economy\ReceiptRow.cs" />
     <Compile Include="Models\User\UserDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Economy\ReceiptRepository.cs" />
+    <Compile Include="Repositories\Economy\IReceiptRepository.cs" />
     <Compile Include="Repositories\User\IUserRepository.cs" />
     <Compile Include="Repositories\User\UserRepository.cs" />
   </ItemGroup>
