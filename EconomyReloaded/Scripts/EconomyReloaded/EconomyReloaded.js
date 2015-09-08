@@ -44,3 +44,17 @@ $("#btnAddReceipt").click(function() {
     });
     return false;
 });
+
+//$("#btnRemoveReceipt").click(function () {
+//    var receiptId = $(this).data('receiptId');
+//    $.ajax({
+//        url: $(this).data('url') + receiptId,
+//        type: "POST",
+//        cache: false,
+//        success: function () {
+//            alert("hejsan");
+//            return true;
+//        }
+//    });
+//    return false;
+//});

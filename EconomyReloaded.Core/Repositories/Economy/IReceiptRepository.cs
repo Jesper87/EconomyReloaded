@@ -11,5 +11,6 @@ namespace EconomyReloaded.Core.Repositories.Economy
     {
         IEnumerable<Receipt> GetReceiptsOnUserId(int userId);
         void Insert(Receipt receipt);
+        void Delete(int receiptId);
     }
 }

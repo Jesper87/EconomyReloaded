@@ -1,8 +1,11 @@
 using Microsoft.Practices.Unity;
 using System.Web.Http;
 using EconomyReloaded.Core.Database;
+using EconomyReloaded.Core.Factories.Economy;
 using EconomyReloaded.Core.Factories.User;
+using EconomyReloaded.Core.Repositories.Economy;
 using EconomyReloaded.Core.Repositories.User;
+using EconomyReloaded.Services.Services.Economy;
 using EconomyReloaded.Services.Services.User;
 using Unity.WebApi;
 
@@ -24,6 +27,10 @@ namespace EconomyReloaded.Api
             container.RegisterType<IUserFactory, UserFactory>();
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IDatabaseConnection, DatabaseConnection>();
+            container.RegisterType<IReceiptRepository, ReceiptRepository>();
+            container.RegisterType<IReceiptFactory, ReceiptFactory>();
+            container.RegisterType<IReceiptService, ReceiptService>();
+            
         }
     }
 }

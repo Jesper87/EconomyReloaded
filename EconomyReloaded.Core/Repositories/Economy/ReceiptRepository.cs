@@ -18,6 +18,18 @@ namespace EconomyReloaded.Core.Repositories.Economy
         private readonly IDatabaseConnection _databaseConnection;
         private readonly IReceiptFactory _receiptFactory;
 
+
+        protected string ConnectionString
+        {
+            get { return _databaseConnection.ConnectionString; }
+        }
+
+        protected bool ConnectionStringExists
+        {
+            get
+            { return !string.IsNullOrEmpty(ConnectionString); }
+        }
+
         public ReceiptRepository(IDatabaseConnection databaseConnection, IReceiptFactory receiptFactory)
         {
             _databaseConnection = databaseConnection;
@@ -26,11 +38,11 @@ namespace EconomyReloaded.Core.Repositories.Economy
 
         public IEnumerable<Receipt> GetReceiptsOnUserId(int userId)
         {
-            if (!string.IsNullOrEmpty(_databaseConnection.ConnectionString))
+            if (ConnectionStringExists)
             {
                 try
                 {
-                    using (var connection = new SqlConnection(_databaseConnection.ConnectionString))
+                    using (var connection = new SqlConnection(ConnectionString))
                     {
                         var receipts = new List<Receipt>();
 
@@ -62,18 +74,44 @@ namespace EconomyReloaded.Core.Repositories.Economy
 
         public void Insert(Receipt receipt)
         {
-            if (receipt!=null)
+            if (ConnectionStringExists)
+            {
+                if (receipt != null)
+                {
+                    try
+                    {
+                        using (var connection = new SqlConnection(ConnectionString))
+                        {
+                            connection.Open();
+                            var command = new SqlCommand("INSERT INTO [dbo].[Receipt] ([UserId],[ReceiptName],[TotalPrice],[ReceiptDate]) VALUES(@userId,@receiptName,@totalPrice,@receiptDate)", connection);
+                            command.Parameters.Add("userId", SqlDbType.Int).Value = receipt.UserId;
+                            command.Parameters.Add("@receiptName", SqlDbType.VarChar).Value = receipt.ReceiptName;
+                            command.Parameters.Add("@totalPrice", SqlDbType.Decimal).Value = receipt.TotalPrice;
+                            command.Parameters.Add("@receiptDate", SqlDbType.Date).Value = receipt.ReceiptDate.Date;
+
+                            var affectedRows = command.ExecuteNonQuery();
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                    }
+                }
+            }
+        }
+
+        public void Delete(int receiptId)
+        {
+            if (ConnectionStringExists)
             {
                 try
                 {
-                    using (var connection = new SqlConnection(_databaseConnection.ConnectionString))
+                    using (var connection = new SqlConnection(ConnectionString))
                     {
                         connection.Open();
-                        var command = new SqlCommand("INSERT INTO [dbo].[Receipt] ([UserId],[ReceiptName],[TotalPrice],[ReceiptDate]) VALUES(@userId,@receiptName,@totalPrice,@receiptDate)", connection);
-                        command.Parameters.Add("userId", SqlDbType.Int).Value = receipt.UserId;
-                        command.Parameters.Add("@receiptName", SqlDbType.VarChar).Value = receipt.ReceiptName;
-                        command.Parameters.Add("@totalPrice", SqlDbType.Decimal).Value = receipt.TotalPrice;
-                        command.Parameters.Add("@receiptDate", SqlDbType.Date).Value = receipt.ReceiptDate.Date;
+                        var command = new SqlCommand("DELETE FROM [dbo].[Receipt] WHERE ReceiptId = @receiptId ", connection);
+                        command.Parameters.Add("receiptId", SqlDbType.Int).Value = receiptId;
 
                         var affectedRows = command.ExecuteNonQuery();
 
@@ -85,5 +123,6 @@ namespace EconomyReloaded.Core.Repositories.Economy
                 }
             }
         }
+        
     }
 }

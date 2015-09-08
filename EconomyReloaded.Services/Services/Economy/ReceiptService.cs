@@ -32,5 +32,11 @@ namespace EconomyReloaded.Services.Services.Economy
             if (receipt.UserId > 0)
                 _receiptRepository.Insert(receipt);
         }
+
+        public void DeleteReceipt(int receiptId)
+        {
+            if (receiptId > 0)
+                _receiptRepository.Delete(receiptId);
+        }
     }
 }

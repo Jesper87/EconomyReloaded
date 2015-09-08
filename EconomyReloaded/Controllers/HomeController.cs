@@ -45,12 +45,12 @@ namespace EconomyReloaded.Controllers
 
                 if (receipts != null && user != null)
                 {
-                    var receiptViewModel = receipts.Select(r => new ReceiptViewModel { ReceiptName = r.ReceiptName, ReceiptTotal = r.TotalPrice , ReceiptDate = r.ReceiptDate});
+                    var receiptViewModel = receipts.Select(r => new ReceiptViewModel { ReceiptId = r.ReceiptId, ReceiptName = r.ReceiptName, ReceiptTotal = r.TotalPrice , ReceiptDate = r.ReceiptDate});
 
                     ViewBag.UserName = user.FirstName + " " + user.LastName;
                     TempData["userId"] = user.UserId;
 
-                    return View("Economy", receiptViewModel);
+                    return View("Economy", receiptViewModel.OrderBy(r=>r.ReceiptDate));
                 }
             }
             return RedirectToAction("Index");

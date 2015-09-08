@@ -23,7 +23,7 @@ namespace EconomyReloaded.Controllers
             if (Request.IsAjaxRequest())
             {
                 var userId = TempData["userId"] != null ? TempData["userId"].ToString() : string.Empty;
-                return PartialView("_AddReceipt", new CreateReceiptViewModel { UserId = userId, ReceiptDate = DateTime.Today});
+                return PartialView("_AddReceipt", new CreateReceiptViewModel { UserId = userId, ReceiptDate = DateTime.Today });
             }
             return RedirectToAction("Index", "Home");
         }
@@ -37,6 +37,37 @@ namespace EconomyReloaded.Controllers
             InsertReceipt(model);
 
             return RedirectToAction("Economy", "Home", new { userId = model.UserId });
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult DeleteReceipe(string receiptId)
+        {
+            var receipt = new DeleteReceiptViewModel { ReceiptId = receiptId};
+            return PartialView("_DeleteReceipt", receipt);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteReceipt(DeleteReceiptViewModel model)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                int rId;
+                if (int.TryParse(model.ReceiptId, out rId))
+                {
+                    _receiptService.DeleteReceipt(rId);
+                }
+            }
+            var userId = TempData["userId"] != null ? TempData["userId"].ToString() : string.Empty;
+
+            return RedirectToAction("Economy", "Home", new { userId = userId });
+
+        }
+
+        public ActionResult EditReceipt()
+        {
+            throw new NotImplementedException();
         }
 
         private void InsertReceipt(CreateReceiptViewModel model)

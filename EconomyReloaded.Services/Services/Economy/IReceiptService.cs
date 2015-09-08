@@ -7,5 +7,6 @@ namespace EconomyReloaded.Services.Services.Economy
     {
         IEnumerable<Receipt> GetReceiptsOnUserId(int userId);
         void InsertReceipt(Receipt receipt);
+        void DeleteReceipt(int receiptId);
     }
 }
