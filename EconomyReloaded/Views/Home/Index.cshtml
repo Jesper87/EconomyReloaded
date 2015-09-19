@@ -1,24 +1,24 @@
 ﻿@model List<EconomyReloaded.ViewModels.UserSimpleViewModel>
 
 @{
-    if (!Model.Any())
-    {
-        <p>Inga användare</p>
-    }
-    else
-    {
-        <h2>Dessa användare funna:</h2>
+  if (!Model.Any())
+  {
+    <p>Inga användare</p>
+  }
+  else
+  {
+    <h2>Dessa användare funna:</h2>
 
-        foreach (var user in Model)
-        {
-            <div class="user-info">
-                <hr />
-                <p>@user.Email</p>
-                <input class="info-more more " type="button" data-userId="@user.UserId" value="+" />
-                <div class="info-@user.UserId"></div>
-                <hr />
-            </div>
-        }
+    foreach (var user in Model)
+    {
+      <div class="user-info">
+        <hr />
+        <p>@user.Email</p>
+        <input class="info-more more " type="button" data-userId="@user.UserId" value="+" />
+        <div class="info-@user.UserId"></div>
+        <hr />
+      </div>
     }
+  }
 
 }

@@ -5,33 +5,33 @@
 
 @if (!Model.Any())
 {
-    <p>No receipts found yet</p>
+  <p>No receipts found yet</p>
 }
 else
 {
-    <table border="1" id="tblEconomy">
-        <tr>
-            <th>Name</th>
-            <th>Total</th>
-            <th>Date</th>
-            <th>Action</th>
-        </tr>
-        @foreach (var row in Model)
+  <table border="1" id="tblEconomy">
+    <tr>
+      <th>Name</th>
+      <th>Total</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+    @foreach (var row in Model)
         {
-            <tr>
-                <td>@row.ReceiptName</td>
-                <td>@row.ReceiptTotal</td>
-                <td><em>@row.ReceiptDate.ToShortDateString()</em></td>
-                <td>
-                    @Html.Action("DeleteReceipe","Receipt", new {receiptId = row.ReceiptId})
-                </td>
-            </tr>
-        }
-        <tr>
-            <td><strong>Sum:</strong></td>
-            <td>@Model.Sum(r => r.ReceiptTotal) <em>kr</em></td>
-        </tr>
-    </table>
+      <tr>
+        <td>@row.ReceiptName</td>
+        <td>@row.ReceiptTotal</td>
+        <td><em>@row.ReceiptDate.ToShortDateString()</em></td>
+        <td>
+          @Html.Action("DeleteReceipe", "Receipt", new { receiptId = row.ReceiptId })
+        </td>
+      </tr>
+    }
+    <tr>
+      <td><strong>Sum:</strong></td>
+      <td>@Model.Sum(r => r.ReceiptTotal) <em>kr</em></td>
+    </tr>
+  </table>
 }
 
 <input type="button" value="Add new receipt" id="btnAddReceipt" data-url="@Url.Action("AddReceipt", "Receipt")" />

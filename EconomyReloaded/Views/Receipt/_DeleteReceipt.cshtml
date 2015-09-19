@@ -1,12 +1,12 @@
 ﻿@model EconomyReloaded.ViewModels.DeleteReceiptViewModel
 
-@using (Html.BeginForm("DeleteReceipt","Receipt", FormMethod.Post))
+@using (Html.BeginForm("DeleteReceipt", "Receipt", FormMethod.Post))
 {
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(m=>m.ReceiptId)
+  @Html.AntiForgeryToken()
+  @Html.HiddenFor(m => m.ReceiptId)
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-    </div>
+  <div class="form-actions no-color">
+    <input type="submit" value="Delete" class="btn btn-default" /> |
+  </div>
 }
 
