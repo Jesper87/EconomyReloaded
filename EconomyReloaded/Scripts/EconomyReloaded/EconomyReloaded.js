@@ -33,28 +33,38 @@
     }
 });
 
-$("#btnAddReceipt").click(function() {
+$("#btnAddReceipt").click(function () {
     $.ajax({
         url: $(this).data('url'),
         type: "GET",
         cache: false,
-        success: function(result) {
+        success: function (result) {
             $("#addReceiptPartial").html(result);
         }
     });
     return false;
 });
 
-//$("#btnRemoveReceipt").click(function () {
-//    var receiptId = $(this).data('receiptId');
-//    $.ajax({
-//        url: $(this).data('url') + receiptId,
-//        type: "POST",
-//        cache: false,
-//        success: function () {
-//            alert("hejsan");
-//            return true;
-//        }
-//    });
-//    return false;
-//});
+$('#addReceiptPartial').on('click', '#btnInsertReceipt', function (e) {
+    $('#errorDate').hide();
+    $('#errorName').hide();
+    $('#errorTotal').hide();
+
+    var name = $('#tbName').val();
+    var total = $('#tbTotal').val();
+    var date = $('#tbDate').val();
+
+    if (!name || !total || !date) {
+        if (!name) {
+            $('#errorName').show();
+        }
+        if (!total) {
+            $('#errorTotal').show();
+        }
+        if (!date) {
+            $('#errorDate').show();
+        }
+        alert('shit is empty!');
+        e.preventDefault();
+    }
+});

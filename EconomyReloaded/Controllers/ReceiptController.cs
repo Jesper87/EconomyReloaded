@@ -22,7 +22,8 @@ namespace EconomyReloaded.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                var userId = TempData["userId"] != null ? TempData["userId"].ToString() : string.Empty;
+                var userId = System.Web.HttpContext.Current.Cache.Get("userId").ToString();
+
                 return PartialView("_AddReceipt", new CreateReceiptViewModel { UserId = userId, ReceiptDate = DateTime.Today });
             }
             return RedirectToAction("Index", "Home");
@@ -32,10 +33,12 @@ namespace EconomyReloaded.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateReceipt(CreateReceiptViewModel model)
         {
-            if (!ModelState.IsValid) return null;
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Economy", "Home", new { userId = model.UserId });
+            }
 
             InsertReceipt(model);
-
             return RedirectToAction("Economy", "Home", new { userId = model.UserId });
         }
 
@@ -43,25 +46,23 @@ namespace EconomyReloaded.Controllers
         [ChildActionOnly]
         public ActionResult DeleteReceipe(string receiptId)
         {
-            var receipt = new DeleteReceiptViewModel { ReceiptId = receiptId};
-            return PartialView("_DeleteReceipt", receipt);
+            return PartialView("_DeleteReceipt", new DeleteReceiptViewModel { ReceiptId = receiptId });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteReceipt(DeleteReceiptViewModel model)
         {
-            if (Request.IsAjaxRequest())
-            {
-                int rId;
-                if (int.TryParse(model.ReceiptId, out rId))
-                {
-                    _receiptService.DeleteReceipt(rId);
-                }
-            }
-            var userId = TempData["userId"] != null ? TempData["userId"].ToString() : string.Empty;
 
-            return RedirectToAction("Economy", "Home", new { userId = userId });
+            int rId;
+            if (int.TryParse(model.ReceiptId, out rId) && ModelState.IsValid)
+            {
+                _receiptService.DeleteReceipt(rId);
+            }
+
+            var userId = System.Web.HttpContext.Current.Cache.Get("userId").ToString();
+
+            return RedirectToAction("Economy", "Home", new { userId });
 
         }
 

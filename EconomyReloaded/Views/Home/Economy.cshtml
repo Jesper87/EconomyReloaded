@@ -1,5 +1,4 @@
-﻿@using System.Web.Mvc.Ajax
-@model IEnumerable<EconomyReloaded.ViewModels.ReceiptViewModel>
+﻿@model IEnumerable<EconomyReloaded.ViewModels.ReceiptViewModel>
 
 <h2>List of economy</h2>
 <h3>Details of @ViewBag.UserName.ToString():</h3>
@@ -25,7 +24,6 @@ else
                 <td><em>@row.ReceiptDate.ToShortDateString()</em></td>
                 <td>
                     @Html.Action("DeleteReceipe","Receipt", new {receiptId = row.ReceiptId})
-                    @*@Ajax.ActionLink("Remove", string.Empty, new {}, new AjaxOptions {Url = Url.Action("DeleteReceipt", "Receipt", new {receiptId = row.ReceiptId.ToString()}), HttpMethod = "Post" })*@
                 </td>
             </tr>
         }

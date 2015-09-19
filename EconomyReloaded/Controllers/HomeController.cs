@@ -48,7 +48,7 @@ namespace EconomyReloaded.Controllers
                     var receiptViewModel = receipts.Select(r => new ReceiptViewModel { ReceiptId = r.ReceiptId, ReceiptName = r.ReceiptName, ReceiptTotal = r.TotalPrice , ReceiptDate = r.ReceiptDate});
 
                     ViewBag.UserName = user.FirstName + " " + user.LastName;
-                    TempData["userId"] = user.UserId;
+                    System.Web.HttpContext.Current.Cache.Insert("userId",user.UserId);
 
                     return View("Economy", receiptViewModel.OrderBy(r=>r.ReceiptDate));
                 }

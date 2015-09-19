@@ -1,3 +1,7 @@
 ﻿body {
     color: #daa520;
 }
+
+#errorDate, #errorName, #errorTotal {
+    display: none;
+}

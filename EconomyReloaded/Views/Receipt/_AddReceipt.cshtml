@@ -1,5 +1,6 @@
 ﻿@model EconomyReloaded.ViewModels.CreateReceiptViewModel
 
+
 @using (Html.BeginForm("CreateReceipt", "Receipt", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -11,24 +12,30 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ReceiptName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ReceiptName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ReceiptName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ReceiptName, new { htmlAttributes = new { @class = "form-control", id = "tbName" } })
+                <span id="errorName">Fill this field!</span>
+
+                @*@Html.ValidationMessageFor(model => model.ReceiptName, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.ReceiptTotal, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ReceiptTotal, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ReceiptTotal, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ReceiptTotal, new { htmlAttributes = new { @class = "form-control", id = "tbTotal" } })
+                <span id="errorTotal">Fill this field!</span>
+
+                @*@Html.ValidationMessageFor(model => model.ReceiptTotal, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.ReceiptDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m=>m.ReceiptDate, String.Format("{0:d}", DateTime.Now.ToShortDateString()), new { @class = "datefield", type = "date" })
-                @Html.ValidationMessageFor(model => model.ReceiptDate, "", new {@class = "text-danger"})
+                @Html.TextBoxFor(m => m.ReceiptDate, String.Format("{0:d}", DateTime.Now.ToShortDateString()), new { @class = "datefield", type = "date", id = "tbDate" })
+                <span id="errorDate">Fill this field!</span>
+
+                @*@Html.ValidationMessageFor(model => model.ReceiptDate, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
@@ -36,7 +43,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" id="btnInsertReceipt" />
             </div>
         </div>
     </div>
