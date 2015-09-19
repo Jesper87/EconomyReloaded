@@ -1,8 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
+using EconomyReloaded.Core.Models.Economy;
 using EconomyReloaded.Services.Services.Economy;
 using EconomyReloaded.Services.Services.User;
 using EconomyReloaded.ViewModels;
+using EconomyReloaded.ViewModelServices;
 
 namespace EconomyReloaded.Controllers
 {
@@ -31,21 +34,29 @@ namespace EconomyReloaded.Controllers
     public ActionResult Economy(string userId)
     {
       int uId;
-      if (int.TryParse(userId, out uId))
-      {
-        var receipts = _receiptService.GetReceiptsOnUserId(uId);
-        var user = _userService.GetById(uId);
+      if (!int.TryParse(userId, out uId))
+        return RedirectToAction("Index");
 
-        if (receipts != null && user != null)
-        {
-          var receiptViewModel = receipts.Select(r => new ReceiptViewModel { ReceiptId = r.ReceiptId, ReceiptName = r.ReceiptName, ReceiptTotal = r.TotalPrice, ReceiptDate = r.ReceiptDate });
+      var receipts = _receiptService.GetReceiptsOnUserId(uId);
+      var user = _userService.GetById(uId);
 
-          ViewBag.UserName = user.FirstName + " " + user.LastName;
-          UserIdSessionService.SaveUserIdInSession(user.UserId);
-          return View("Economy", receiptViewModel.OrderBy(r => r.ReceiptDate));
-        }
-      }
-      return RedirectToAction("Index");
+      if (receipts == null || user == null)
+        return RedirectToAction("Index");
+
+      var sortedModel = BuildViewModel(receipts);
+
+      ViewBag.UserName = user.FirstName + " " + user.LastName;
+      UserIdSessionService.SaveUserIdInSession(user.UserId);
+      return View("Economy", sortedModel);
+    }
+
+    private Dictionary<string, List<ReceiptViewModel>> BuildViewModel(IEnumerable<Receipt> receipts)
+    {
+      var receiptViewModel = receipts.Select(r => new ReceiptViewModel { ReceiptId = r.ReceiptId, ReceiptName = r.ReceiptName, ReceiptTotal = r.TotalPrice, ReceiptDate = r.ReceiptDate });
+      var sortedModel = SortReceiptViewModelsByDate.Sort(receiptViewModel);
+      return sortedModel;
     }
   }
+
+
 }

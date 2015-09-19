@@ -11,7 +11,7 @@ namespace EconomyReloaded.Services.Services.User
     {
       get
       {
-        if (HttpContext.Current == null)
+        if (HttpContext.Current == null || HttpContext.Current.Session == null)
           return string.Empty;
         return HttpContext.Current.Session[UserIdSessionKey] == null ? string.Empty : HttpContext.Current.Session[UserIdSessionKey].ToString();
       }

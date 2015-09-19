@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace EconomyReloaded.Api.Controllers
+namespace EconomyReloaded.Api.Model
 {
     [DataContract]
     public class ReceiptHalFormat
