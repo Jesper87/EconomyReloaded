@@ -24,10 +24,13 @@ namespace EconomyReloaded.Controllers
     public ActionResult Index()
     {
       var users = _userService.GetAllUsers();
+      if (users != null)
+      {
+        var userViewModel = users.Select(user => new UserSimpleViewModel { Email = user.Email, UserId = user.UserId });
 
-      var userViewModel = users.Select(user => new UserSimpleViewModel { Email = user.Email, UserId = user.UserId }).ToList();
-
-      return View("Index", userViewModel);
+        return View("Index", userViewModel);
+      }
+      return View("Index", Enumerable.Empty<UserSimpleViewModel>());
     }
 
     // GET: Home/Economy?userId=#

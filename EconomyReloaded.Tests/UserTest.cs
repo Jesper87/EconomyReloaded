@@ -12,48 +12,32 @@ using NUnit.Framework;
 
 namespace EconomyReloaded.Tests
 {
-    [TestFixture]
-    public class UserTest
-    {
-        [Test]
-        public void GetAllReturnsAllUsers()
-        {
-            var service = new FakeUserService();
+  [TestFixture]
+  public class UserTest
+  {
+    //  [Test]
+    //  public void EnsureUserIdsAreIncrementedBy100()
+    //  {
+    //    var mock = new MockUserRepository();
+    //    var service = new UserService(mock);
 
-            var result = service.GetAllUsers();
+    //    var incrementedUsers = service.Increment();
 
-            Assert.IsNotNull(result);
-        }
-    }
+    //    Assert.AreEqual(101, incrementedUsers.First().UserId);
+    //  }
+    //}
 
-    class FakeUserService : IUserService
-    {
-        public IEnumerable<UserDetails> GetAllUsers()
-        {
-            MockUserRepository repo = new MockUserRepository();
-            return repo.GetAllUsers();
-        }
+    //public class MockUserRepository : IUserRepository
+    //{
+    //  public IEnumerable<UserDetails> GetAllUsers()
+    //  {
+    //     return new List<UserDetails>() { new UserDetails {Email = "test", FirstName = "test", UserId = 1, LastName = "test"} };
+    //  }
 
-        public UserDetails GetById(int userId)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    class MockUserRepository : IUserRepository
-    {
-        private List<UserDetails> _db = new List<UserDetails> { new UserDetails { FirstName = "jesper", LastName = "dahlberg", UserId = 1, Email = "jesdah@test.com" } };
-
-        public IEnumerable<UserDetails> GetAllUsers()
-        {
-            return _db.ToList();
-        }
-
-        public UserDetails GetUserById(int userId)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-
+    //  public UserDetails GetUserById(int userId)
+    //  {
+    //    throw new NotImplementedException();
+    //  }
+    //}
+  }
 }

@@ -16,7 +16,9 @@ namespace EconomyReloaded.Services.Services.User
     {
       var users = _userRepository.GetAllUsers();
       if (users != null)
+      {
         return users;
+      }
       return null;
     }
 

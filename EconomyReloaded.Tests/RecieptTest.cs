@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
+using System.Linq;
 using EconomyReloaded.Controllers;
 using EconomyReloaded.Core.Database;
 using EconomyReloaded.Core.Factories.Economy;
@@ -32,7 +33,7 @@ namespace EconomyReloaded.Tests
     }
 
     [Test]
-    public void TestMethod1()
+    public void EnusureMonthsAreSortedLowToHighNumber()
     {
       //Arrange
       var data = MockData();
@@ -41,8 +42,10 @@ namespace EconomyReloaded.Tests
       var test = SortReceiptViewModelsByDate.Sort(data);
 
       //Assert
-      Assert.NotNull(test);
+      var firstEle = test.First().Key.Split('-');
+      var lastEle = test.Last().Key.Split('-');
 
+      Assert.LessOrEqual(firstEle[1], lastEle[1]);
     }
 
     private List<ReceiptViewModel> MockData()
@@ -51,7 +54,7 @@ namespace EconomyReloaded.Tests
       {
         new ReceiptViewModel
         {
-          ReceiptDate = new DateTime(2015, 1, 2),
+          ReceiptDate = new DateTime(2015, 11, 2),
           ReceiptId = 1,
           ReceiptName = "Test1",
           ReceiptTotal = 123
@@ -72,7 +75,7 @@ namespace EconomyReloaded.Tests
         },
         new ReceiptViewModel
         {
-          ReceiptDate = new DateTime(2015, 4, 7),
+          ReceiptDate = new DateTime(2015, 12, 7),
           ReceiptId = 4,
           ReceiptName = "Test4",
           ReceiptTotal = 123
@@ -86,7 +89,7 @@ namespace EconomyReloaded.Tests
         },
         new ReceiptViewModel
         {
-          ReceiptDate = new DateTime(2015, 7, 12),
+          ReceiptDate = new DateTime(2015, 1, 12),
           ReceiptId = 6,
           ReceiptName = "Test6",
           ReceiptTotal = 123

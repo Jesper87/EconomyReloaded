@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EconomyReloaded.Core.Database;
 using EconomyReloaded.Core.Factories.Economy;
+using EconomyReloaded.Core.Logging;
 using EconomyReloaded.Core.Models.Economy;
 
 namespace EconomyReloaded.Core.Repositories.Economy
@@ -55,9 +56,9 @@ namespace EconomyReloaded.Core.Repositories.Economy
       }
       catch (Exception ex)
       {
-        Debug.WriteLine(ex.Message);
+        CustomLogger.Log(ex);
+        return null;
       }
-      return null;
     }
 
     public void Insert(Receipt receipt)
@@ -81,7 +82,7 @@ namespace EconomyReloaded.Core.Repositories.Economy
         }
         catch (Exception ex)
         {
-          Debug.WriteLine(ex.Message);
+          CustomLogger.Log(ex);
         }
       }
     }
@@ -102,7 +103,7 @@ namespace EconomyReloaded.Core.Repositories.Economy
       }
       catch (Exception ex)
       {
-        Debug.WriteLine(ex.Message);
+        CustomLogger.Log(ex);
       }
     }
 
