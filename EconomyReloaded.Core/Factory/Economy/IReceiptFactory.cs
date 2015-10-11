@@ -1,7 +1,7 @@
 using System.Data.SqlClient;
 using EconomyReloaded.Core.Models.Economy;
 
-namespace EconomyReloaded.Core.Factories.Economy
+namespace EconomyReloaded.Core.Factory.Economy
 {
     public interface IReceiptFactory
     {

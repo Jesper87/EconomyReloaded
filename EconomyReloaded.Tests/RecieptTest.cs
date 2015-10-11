@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using EconomyReloaded.Controllers;
 using EconomyReloaded.Core.Database;
-using EconomyReloaded.Core.Factories.Economy;
-using EconomyReloaded.Core.Factories.User;
 using EconomyReloaded.Core.Repositories.Economy;
 using EconomyReloaded.Core.Repositories.User;
 using EconomyReloaded.Services.Services.Economy;
@@ -25,12 +23,6 @@ namespace EconomyReloaded.Tests
   [TestFixture]
   public class RecieptTest
   {
-    public RecieptTest()
-    {
-      //
-      // TODO: Add constructor logic here
-      //
-    }
 
     [Test]
     public void EnusureMonthsAreSortedLowToHighNumber()

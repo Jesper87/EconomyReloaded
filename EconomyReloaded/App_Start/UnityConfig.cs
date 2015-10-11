@@ -1,7 +1,7 @@
 using System;
 using EconomyReloaded.Core.Database;
-using EconomyReloaded.Core.Factories.Economy;
-using EconomyReloaded.Core.Factories.User;
+using EconomyReloaded.Core.Factory.Economy;
+using EconomyReloaded.Core.Factory.User;
 using EconomyReloaded.Core.Repositories.Economy;
 using EconomyReloaded.Core.Repositories.User;
 using EconomyReloaded.Services.Services.Economy;

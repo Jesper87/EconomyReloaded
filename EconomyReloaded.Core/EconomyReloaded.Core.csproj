@@ -56,10 +56,10 @@
   <ItemGroup>
     <Compile Include="Database\DatabaseConnection.cs" />
     <Compile Include="Database\IDatabaseConnection.cs" />
-    <Compile Include="Factories\Economy\IReceiptFactory.cs" />
-    <Compile Include="Factories\Economy\ReceiptFactory.cs" />
-    <Compile Include="Factories\User\IUserFactory.cs" />
-    <Compile Include="Factories\User\UserFactory.cs" />
+    <Compile Include="Factory\Economy\IReceiptFactory.cs" />
+    <Compile Include="Factory\Economy\ReceiptFactory.cs" />
+    <Compile Include="Factory\User\IUserFactory.cs" />
+    <Compile Include="Factory\User\UserFactory.cs" />
     <Compile Include="Logging\CustomLogger.cs" />
     <Compile Include="Models\Economy\Receipt.cs" />
     <Compile Include="Models\Economy\ReceiptRow.cs" />

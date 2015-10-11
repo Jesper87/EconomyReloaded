@@ -1,6 +1,6 @@
 using System.Data.SqlClient;
 
-namespace EconomyReloaded.Core.Factories.User
+namespace EconomyReloaded.Core.Factory.User
 {
     public interface IUserFactory
     {

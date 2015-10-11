@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EconomyReloaded.Core.Database;
-using EconomyReloaded.Core.Factories.User;
 using EconomyReloaded.Core.Models.User;
 using EconomyReloaded.Core.Repositories.User;
 using EconomyReloaded.Services.Services.User;

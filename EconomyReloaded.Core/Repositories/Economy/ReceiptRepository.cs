@@ -8,7 +8,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using EconomyReloaded.Core.Database;
-using EconomyReloaded.Core.Factories.Economy;
+using EconomyReloaded.Core.Factory.Economy;
 using EconomyReloaded.Core.Logging;
 using EconomyReloaded.Core.Models.Economy;
 

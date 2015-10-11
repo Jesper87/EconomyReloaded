@@ -8,65 +8,50 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using EconomyReloaded.Controllers;
+using EconomyReloaded.Core.Database;
+using EconomyReloaded.Core.Factory.Economy;
+using EconomyReloaded.Core.Factory.User;
 using EconomyReloaded.Core.Models.User;
+using EconomyReloaded.Core.Repositories.Economy;
 using EconomyReloaded.Core.Repositories.User;
 using EconomyReloaded.Services.Services.Economy;
 using EconomyReloaded.Services.Services.User;
+using EconomyReloaded.ViewModels;
 using NUnit.Framework;
 
 namespace EconomyReloaded.Tests
 {
-    [TestFixture]
-    class HomeControllerTests
+  [TestFixture]
+  class HomeControllerTests
+  {
+    private HomeController _homeController;
+
+    [TestFixtureSetUp]
+    public void Setup()
     {
-        //[Test]
-        //public void IndexReturnsView()
-        //{
-        //    var controller = GetHomeControler(new FakeUserService());
-
-        //    var result = controller.Index() as ViewResult;
-
-        //    Assert.AreEqual("Index",result.ViewName);
-        //}
-
-        //[Test]
-        //public void IndexHasUserModel()
-        //{
-        //    var controller = GetHomeControler(new FakeUserService());
-
-        //    var result = controller.Index() as ViewResult;
-
-        //    Assert.IsAssignableFrom(typeof(List<UserDetails>), result.Model);
-        //    Assert.IsNotNull(result.Model);
-        //}
-
-
-        //private static HomeController GetHomeControler(IUserService userService, IReceiptService receiptService)
-        //{
-        //    HomeController homeController = new HomeController(userService, receiptService);
-
-        //    homeController.ControllerContext = new ControllerContext
-        //    {
-        //        Controller = homeController,
-        //        RequestContext = new RequestContext(new MockHttpContext(), new RouteData())
-        //    };
-
-        //    return homeController;
-        //}
-
-        //private class MockHttpContext : HttpContextBase
-        //{
-        //    private readonly IPrincipal _user = new GenericPrincipal(new GenericIdentity("someUser"), null);
-
-        //    public override IPrincipal User
-        //    {
-        //        get
-        //        {
-        //            return _user;
-        //        }
-        //        set { base.User = value; }
-        //    }
-        //}
+      _homeController = new HomeController(new UserService(new UserRepository(new DatabaseConnection(), new UserFactory())), new ReceiptService(new ReceiptRepository(new DatabaseConnection(), new ReceiptFactory())));
     }
+
+    [Test]
+    public void IndexReturnsView()
+    {
+      var controller = _homeController;
+
+      var result = controller.Index() as ViewResult;
+
+      Assert.AreEqual("Index", result.ViewName);
+    }
+
+    [Test]
+    public void IndexHasUserModel()
+    {
+      var controller = _homeController;
+
+      var result = controller.Index() as ViewResult;
+
+      Assert.IsInstanceOf(typeof(IEnumerable<UserSimpleViewModel>), result.Model);
+      Assert.IsNotNull(result.Model);
+    }
+  }
 
 }

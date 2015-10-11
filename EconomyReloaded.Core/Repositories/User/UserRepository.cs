@@ -7,8 +7,8 @@ using System.IO;
 using System.Text;
 using System.Web.Http.ExceptionHandling;
 using EconomyReloaded.Core.Database;
-using EconomyReloaded.Core.Factories;
-using EconomyReloaded.Core.Factories.User;
+using EconomyReloaded.Core.Factory;
+using EconomyReloaded.Core.Factory.User;
 using EconomyReloaded.Core.Logging;
 
 namespace EconomyReloaded.Core.Repositories.User
