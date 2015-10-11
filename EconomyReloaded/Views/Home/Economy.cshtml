@@ -1,5 +1,5 @@
 ﻿@using System.Linq
-@model Dictionary<string, List<EconomyReloaded.ViewModels.ReceiptViewModel>>
+@model IEnumerable<IGrouping<string, EconomyReloaded.ViewModels.ReceiptViewModel>>
 
 <h2>List of economy</h2>
 <h3>Details of @ViewBag.UserName.ToString():</h3>
@@ -17,6 +17,7 @@ else
       <th>Date</th>
       <th>Action</th>
     </tr>
+
     @foreach (var row in Model)
     {
       <tr>
@@ -24,20 +25,20 @@ else
           <strong>@row.Key</strong>
         </td>
       </tr>
-      foreach (var item in row.Value)
+
+      foreach (var element in row)
       {
         <tr>
-          <td>@item.ReceiptName</td>
-          <td>@item.ReceiptTotal</td>
-          <td><em>@item.ReceiptDate.ToShortDateString()</em></td>
-          <td>
-            @Html.Action("DeleteReceipe", "Receipt", new { receiptId = item.ReceiptId })
-          </td>
+          <td>@element.ReceiptName</td>
+          <td>@element.ReceiptTotal</td>
+          <td>@element.ReceiptDate.ToShortDateString()</td>
+          <td>@Html.Action("DeleteReceipe", "Receipt", new { receiptId = element.ReceiptId })</td>
         </tr>
       }
+
       <tr>
         <td><strong>Sum:</strong></td>
-        <td>@row.Value.Sum(r=>r.ReceiptTotal) <em>kr</em></td>
+        <td>@row.Sum(x=>x.ReceiptTotal)</td>
       </tr>
     }
   </table>

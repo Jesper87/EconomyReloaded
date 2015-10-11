@@ -13,6 +13,7 @@ namespace EconomyReloaded.Controllers
   {
     private readonly IUserService _userService;
     private readonly IReceiptService _receiptService;
+    
 
     public HomeController(IUserService userService, IReceiptService receiptService)
     {
@@ -50,14 +51,14 @@ namespace EconomyReloaded.Controllers
 
       ViewBag.UserName = user.FirstName + " " + user.LastName;
       UserIdSessionService.SaveUserIdInSession(user.UserId);
+
       return View("Economy", sortedModel);
     }
 
-    private Dictionary<string, List<ReceiptViewModel>> BuildViewModel(IEnumerable<Receipt> receipts)
+    private IEnumerable<IGrouping<string, ReceiptViewModel>> BuildViewModel(IEnumerable<Receipt> receipts)
     {
       var receiptViewModel = receipts.Select(r => new ReceiptViewModel { ReceiptId = r.ReceiptId, ReceiptName = r.ReceiptName, ReceiptTotal = r.TotalPrice, ReceiptDate = r.ReceiptDate });
-      var sortedModel = SortReceiptViewModelsByDate.Sort(receiptViewModel);
-      return sortedModel;
+      return SortReceiptViewModelsByDate.Sort(receiptViewModel);
     }
   }
 

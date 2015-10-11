@@ -7,33 +7,11 @@ namespace EconomyReloaded.ViewModelServices
 {
   public class SortReceiptViewModelsByDate
   {
-    public static Dictionary<string, List<ReceiptViewModel>> Sort(IEnumerable<ReceiptViewModel> model)
+    private const string DateFormat = "yyyy-MM";
+
+    public static IEnumerable<IGrouping<string, ReceiptViewModel>> Sort(IEnumerable<ReceiptViewModel> model)
     {
-      var sortedReceipts = new Dictionary<string, List<ReceiptViewModel>>();
-      var sortedModel = model.OrderBy(r => r.ReceiptDate);
-
-      foreach (var item in sortedModel)
-      {
-        var date = RemoveDays(item.ReceiptDate);
-        if (!sortedReceipts.ContainsKey(date))
-          sortedReceipts.Add(date, new List<ReceiptViewModel>());
-      }
-
-      foreach (var item in sortedModel)
-      {
-        var date = RemoveDays(item.ReceiptDate);
-        if (sortedReceipts.ContainsKey(date))
-        {
-          sortedReceipts[date].Add(item);
-        }
-      }
-
-      return sortedReceipts;
-    }
-
-    private static string RemoveDays(DateTime dateTime)
-    {
-      return dateTime.ToString("yyyy-MM");
+      return model.OrderBy(x=>x.ReceiptDate).GroupBy(x => x.ReceiptDate.ToString(DateFormat));
     }
   }
 }
