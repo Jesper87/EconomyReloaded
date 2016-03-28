@@ -9,7 +9,7 @@ namespace EconomyReloaded.Core.Logging
     public static void Log(Exception ex)
     {
       var file = "ErrorLog.txt";
-      var fileName = string.Format("{0}{1}",DateTime.Now.ToString("yyyyMdd-hhmmss"),file);
+      var fileName = string.Format("{0}{1}", DateTime.Now.ToString("yyyyMdd-hhmmss"), file);
       if (Directory.Exists(LogPath))
       {
         try
@@ -21,6 +21,7 @@ namespace EconomyReloaded.Core.Logging
         }
         catch (Exception)
         {
+
         }
       }
     }
