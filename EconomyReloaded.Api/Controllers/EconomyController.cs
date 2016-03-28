@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Results;
-using System.Web.Mvc;
 using EconomyReloaded.Api.Model;
 using EconomyReloaded.Core.Models.User;
 using EconomyReloaded.Services.Services.Economy;
 using EconomyReloaded.Services.Services.User;
-using Newtonsoft.Json;
 
 namespace EconomyReloaded.Api.Controllers
 {
@@ -27,7 +23,7 @@ namespace EconomyReloaded.Api.Controllers
     }
 
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [System.Web.Http.Route("api/Economy/GetUserDetails/{userId}")]
+    [Route("api/Economy/GetUserDetails/{userId}")]
     public JsonResult<UserDetails> GetUserDetails(string userId)
     {
       int uId;
@@ -41,7 +37,7 @@ namespace EconomyReloaded.Api.Controllers
     }
 
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [System.Web.Http.Route("api/Economy/GetReceiptsForUser/{userId}")]
+    [Route("api/Economy/GetReceiptsForUser/{userId}")]
     public JsonResult<IEnumerable<ReceiptHalFormat>> GetReceiptsForUser(string userId)
     {
       int uId;

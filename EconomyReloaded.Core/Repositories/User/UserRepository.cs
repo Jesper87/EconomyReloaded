@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-using System.Web.Http.ExceptionHandling;
 using EconomyReloaded.Core.Database;
-using EconomyReloaded.Core.Factory;
 using EconomyReloaded.Core.Factory.User;
 using EconomyReloaded.Core.Logging;
+using EconomyReloaded.Core.Models.User;
 
 namespace EconomyReloaded.Core.Repositories.User
 {
@@ -26,13 +22,13 @@ namespace EconomyReloaded.Core.Repositories.User
       this._userFactory = userFactory;
     }
 
-    public IEnumerable<Models.User.UserDetails> GetAllUsers()
+    public IEnumerable<UserDetails> GetAllUsers()
     {
       try
       {
         using (var connection = new SqlConnection(ConnectionString))
         {
-          var users = new List<Models.User.UserDetails>();
+          var users = new List<UserDetails>();
 
           connection.Open();
           var command = new SqlCommand("SELECT [UserId],[Email],[FirstName],[LastName] FROM [dbo].[Users]", connection);
@@ -58,13 +54,13 @@ namespace EconomyReloaded.Core.Repositories.User
       }
     }
 
-    public Models.User.UserDetails GetUserById(int userId)
+    public UserDetails GetUserById(int userId)
     {
       try
       {
         using (var connection = new SqlConnection(ConnectionString))
         {
-          var selectedUser = new Models.User.UserDetails();
+          var selectedUser = new UserDetails();
 
           connection.Open();
           var command = new SqlCommand("SELECT [UserId],[Email],[FirstName],[LastName] FROM [dbo].[Users] WHERE UserId = @userId", connection);

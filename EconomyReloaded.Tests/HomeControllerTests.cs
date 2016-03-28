@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Web.Routing;
 using EconomyReloaded.Controllers;
 using EconomyReloaded.Core.Database;
 using EconomyReloaded.Core.Factory.Economy;
 using EconomyReloaded.Core.Factory.User;
-using EconomyReloaded.Core.Models.User;
 using EconomyReloaded.Core.Repositories.Economy;
 using EconomyReloaded.Core.Repositories.User;
 using EconomyReloaded.Services.Services.Economy;
@@ -39,6 +31,7 @@ namespace EconomyReloaded.Tests
 
       var result = controller.Index() as ViewResult;
 
+      Assert.IsNotNull(result);
       Assert.AreEqual("Index", result.ViewName);
     }
 
@@ -49,8 +42,9 @@ namespace EconomyReloaded.Tests
 
       var result = controller.Index() as ViewResult;
 
-      Assert.IsInstanceOf(typeof(IEnumerable<UserSimpleViewModel>), result.Model);
+      Assert.IsNotNull(result);
       Assert.IsNotNull(result.Model);
+      Assert.IsInstanceOf(typeof(IEnumerable<UserSimpleViewModel>), result.Model);
     }
   }
 

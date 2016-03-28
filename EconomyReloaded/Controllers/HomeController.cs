@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Web.Mvc;
 using EconomyReloaded.Core.Models.Economy;
+using EconomyReloaded.Helpers;
 using EconomyReloaded.Services.Services.Economy;
 using EconomyReloaded.Services.Services.User;
 using EconomyReloaded.ViewModels;
-using EconomyReloaded.ViewModelServices;
 
 namespace EconomyReloaded.Controllers
 {

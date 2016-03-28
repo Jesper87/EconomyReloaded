@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using EconomyReloaded.ViewModels;
 
-namespace EconomyReloaded.ViewModelServices
+namespace EconomyReloaded.Helpers
 {
   public class SortReceiptViewModelsByDate
   {
